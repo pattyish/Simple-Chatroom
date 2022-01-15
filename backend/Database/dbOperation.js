@@ -16,7 +16,6 @@ class Operations {
       console.log(`Error on select ${error}`);
     }
   }
-
   async insertData(data) {
     const params = [];
     const chunks = [];
