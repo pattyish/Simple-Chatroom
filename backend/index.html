@@ -30,7 +30,7 @@
             document.getElementById("name").innerHTML = playload.name;
             document.getElementById("message").innerHTML = playload.message;
         });
-        socket.emit("chatroom", { name: "Patrick Ishimwe", message: "This is start of the semester" });
+        socket.emit("chatroom", { user_id: 12222, name: "Patrick Ishimwe", message: "This is start of the semester" });
     </script>
 </body>
 

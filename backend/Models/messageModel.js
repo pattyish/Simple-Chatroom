@@ -1,6 +1,6 @@
 class MessageSchema {
   constructor(msg) {
-    this.sender = msg.sender;
+    this.sender_id = msg.sender_id;
     this.message = msg.message;
     // this.createdAt = moment().format();
   }
