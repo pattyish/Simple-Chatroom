@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const auth = (req, res, next) => {
+export const auth = async (req, res, next) => {
   try {
     if (!req.headers.authorization) throw "Forbidden";
     const token = req.headers.authorization.split(" ")[1];
@@ -13,7 +13,8 @@ export const auth = (req, res, next) => {
         msg: "There no token provided!!",
       });
     }
-    const payload = await jwt.verify(token, process.env.SECRET);
+    const payload = await jwt.verify(token, process.env.SECRET_KEY);
+    
     req.payload = payload;
     next();
   } catch (error) {

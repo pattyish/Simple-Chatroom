@@ -1,9 +1,8 @@
-import moment from "moment";
 class MessageSchema {
   constructor(msg) {
     this.sender = msg.sender;
     this.message = msg.message;
-    this.createdAt = moment().format();
+    // this.createdAt = moment().format();
   }
 
   static chatMessage() {

@@ -16,6 +16,17 @@ class Operations {
       console.log(`Error on select ${error}`);
     }
   }
+  async getAll() {
+    const query = {
+      text: `SELECT * FROM ${this.tableName}`,
+    };
+    try {
+      const results = await pool.query(query);
+      return results;
+    } catch (error) {
+      console.log(`Error on select ${error}`);
+    }
+  }
   async insertData(data) {
     const params = [];
     const chunks = [];

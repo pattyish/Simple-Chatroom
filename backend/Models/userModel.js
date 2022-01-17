@@ -1,7 +1,7 @@
 import moment from "moment";
 import bcrypt from "bcryptjs";
 
-class UserSchame {
+class UserSchema {
   constructor(user) {
     this.name = user.name;
     this.username = user.username;
@@ -17,4 +17,4 @@ class UserSchame {
   }
 }
 
-export { UserSchame as default };
+export { UserSchema as default };
