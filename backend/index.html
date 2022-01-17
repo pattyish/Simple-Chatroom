@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Socket io</title>
+</head>
+<div>
+    <h1>Chat Application</h1>
+</div>
+<div>
+    <h6 id="name"></h6>
+    <p id="message">
+    </p>
+</div>
+
+<body>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+        integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+        crossorigin="anonymous"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script>
+        const socket = io.connect("http://localhost:8080", {
+            transports: ["websocket"]
+        });
+        socket.on("chat", (playload) => {
+            console.log(`Chat message have reached out with ${playload.name} and ${playload.message}`);
+            document.getElementById("name").innerHTML = playload.name;
+            document.getElementById("message").innerHTML = playload.message;
+        });
+        socket.emit("chatroom", { user_id: 12222, name: "Patrick Ishimwe", message: "This is start of the semester" });
+    </script>
+</body>
+
+</html>
