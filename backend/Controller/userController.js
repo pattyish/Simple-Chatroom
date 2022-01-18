@@ -7,7 +7,7 @@ import userModel from "../Models/userModel.js";
 const db = new DBOperation("users");
 class UserController {
   static async createUser(req, res) {
-    const errors = validationResult(req.body);
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
         errors: errors.array(),
@@ -48,7 +48,7 @@ class UserController {
     }
   }
   static async signIn(req, res) {
-    const errors = validationResult(req.body);
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
         errors: errors.array(),
