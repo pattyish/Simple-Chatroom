@@ -1,5 +1,6 @@
 import express from "express";
 import http from "http";
+import cors from "cors";
 import moment from "moment";
 import { Server } from "socket.io";
 import bodyParser from "body-parser";
@@ -17,13 +18,17 @@ const io = new Server(server, {
   },
 });
 const PORT = 8080;
-
+// app.use(express.json())
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
+app.use(cors());
 app.use("/api/v1/chat/user", userRoute);
 app.use("/api/v1/chatroom", chatroomRoute);
 app.get("/", (req, res) => {
   res.status(200).send("Now it's running on port 8080");
+});
+server.listen(PORT, () => {
+  console.log(`Connection Started on localhost port ${PORT}`);
 });
 io.on("connection", (socket) => {
   console.log("What is a socket:", socket.id);
@@ -46,8 +51,5 @@ io.on("connection", (socket) => {
     console.log("What is playload: ", message);
     io.emit("chat", message);
   });
-});
-server.listen(PORT, () => {
-  console.log(`Connection Started on localhost port ${PORT}`);
 });
 export { app as default };
