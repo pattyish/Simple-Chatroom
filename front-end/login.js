@@ -1,3 +1,4 @@
+const BASE = "http://localhost:8080/api/v1";
 const login = async function () {
     // e.preventDefault();
     const username = document.querySelector("#log-username").value;
@@ -19,7 +20,7 @@ const login = async function () {
         const res = await axios.post(`${BASE}/chat/user/sign_in`, auth, config);
         console.log("Hello world!!");
         if (res.status === 200) {
-            window.location.href = `chatroom.html`;
+            window.location.href = `/chatroom.html`;
         } else {
           console.log(`problem`);
         }
