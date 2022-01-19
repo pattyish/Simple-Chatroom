@@ -1,6 +1,7 @@
 import express from "express";
 import http from "http";
 import moment from "moment";
+import cors from "cors";
 import { Server } from "socket.io";
 import bodyParser from "body-parser";
 import userRoute from "./Routes/userRoute.js";
@@ -17,7 +18,7 @@ const io = new Server(server, {
   },
 });
 const PORT = 8080;
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/v1/chat/user", userRoute);
