@@ -4,8 +4,9 @@
 }
 /* Chatroom page */
 .chatroom {
-    padding: 10px;
+    padding: 15px;
     border: 2px solid gray;
+    background-color: #f8f9fa !important;
 }
 .chatroom-messages {
     padding: 5px;
