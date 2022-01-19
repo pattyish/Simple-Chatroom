@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import cors from "cors";
 import moment from "moment";
+import cors from "cors";
 import { Server } from "socket.io";
 import bodyParser from "body-parser";
 import userRoute from "./Routes/userRoute.js";
@@ -18,7 +19,7 @@ const io = new Server(server, {
   },
 });
 const PORT = 8080;
-// app.use(express.json())
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
 app.use(cors());
