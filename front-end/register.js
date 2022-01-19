@@ -24,8 +24,8 @@ const register = async function () {
       };
       console.log({ name: name, username: username, password: password });
       console.log(BASE);
-      // const res = await axios.post(`${BASE}/chat/user/sign_up`, auth, config);
-      const res = await axios.get('https://api.github.com/users')
+      const res = await axios.post(`${BASE}/chat/user/sign_up`, auth, config);
+      // const res = await axios.get('https://api.github.com/users')
       console.log("Hello world!!");
       console.log(res)
       if (res.status === 200) {
