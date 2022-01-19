@@ -23,7 +23,7 @@ const login = async function () {
         localStorage.setItem("CC_Token", res.data.token);
         console.log(window.location);
         console.log(window.URL)
-        // window.location.href = `https://pattyish.github.io/FSE_Chatroom/front-end/chatroom.html`;
+        window.location.href = `https://pattyish.github.io/FSE_Chatroom/front-end/chatroom.html`;
       }
     } catch (error) {
       console.log(error.response.data.message);
