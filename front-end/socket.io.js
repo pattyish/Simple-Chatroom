@@ -1,6 +1,4 @@
-const socket = io.connect("http://localhost:8080", {
-  transports: ["websocket"],
-});
+const socket = io.connect("http://localhost:8080");
 socket.on("chat", (playload) => {
   let message = `
   <div class=" col-md-12 bg-light chatroom-messages">
