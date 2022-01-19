@@ -23,44 +23,40 @@
 <body style="background-image: url('./background.jfif');">
     <div class="container" style="padding: 10%;">
         <div class=" col-md-8 offset-md-2 login-form  align-self-center " style="padding: 5%;">
-            <div class="col align-self-center">
-                <form class="row row-cols-lg-auto g-3">
+            <div class="col align-self-center" style="padding: 2%;">
+                <div class="row row-cols-lg-auto g-3">
                     <div class="col-12 text-center">
-                        <h4>Register In FSE-Chatroom</h4>
-                    </div>
-                    <div class="col-12">
-                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Name</label>
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="fa fa-user" style="font-size:24px"></i></div>
-                            <input type="text" id="reg-name" class="form-control"
-                                placeholder="Enter Name here....">
-                        </div>
+                        <h4>Join FSE-Chatroom</h4>
                     </div>
                     <div class="col-12">
                         <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
                         <div class="input-group">
                             <div class="input-group-text"><i class="fa fa-user" style="font-size:24px"></i></div>
-                            <input type="text" id="reg-username" class="form-control"
+                            <input type="text" id="log-username" class="form-control"
                                 placeholder="Enter User-name here....">
                         </div>
                     </div>
                     <div class="col-12">
-                        <label class="visually-hidden" for="inlineFormInputGroupUsername">Password</label>
+                        <label class="visually-hidden" for="Username">Username</label>
                         <div class="input-group">
                             <div class="input-group-text"><i class="fa fa-lock" style="font-size:24px"></i></div>
-                            <input type="password" id="reg-password" class="form-control" style="text-align: center;"
-                                placeholder="Enter Password here.....">
+                            <input type="password" id="log-password" class="form-control"
+                                placeholder="Enter Password here....">
                         </div>
                     </div>
                     <div class="col-12">
-                        <button type="submit" id="register"  class="btn btn-primary">Register</button>
+                        <button type="submit" id="login" class="btn btn-primary">Login</button>
                     </div>
-                </form>
+                    <div class="col-12">
+                        <a href="sign_up.html" style="font-style: italic; font-weight: 500; font-size: 15px;">Sigin Up,
+                            if you don't have account</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="login.js" type="text/javascript">
+    </script>
 </body>
-<script src="register.js" type="text/javascript">
-</script>
 
 </html>
