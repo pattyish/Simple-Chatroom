@@ -27,19 +27,16 @@ const register = async function () {
       console.log(BASE);
       const res = await axios.post(`${BASE}/chat/user/sign_up`, auth, config);
       if (res.status === 201) {
-        messageDisplay.classList.add = "alert-success";
-        messageDisplay.innerHTML = `<strong> ${res.message} </strong>`;
-      } else {
-        console.log(res);
-        // messageDisplay.classList.add = "alert-danger";
-        // messageDisplay.innerHTML = `<strong> ${res.message} </strong>`;
+        messageDisplay.innerHTML = `
+        <div class="alert alert-danger fade show" role="alert">
+        ${res.message}  </div>`;
       }
     } catch (error) {
       console.log(error.response.data.message);
-        messageDisplay.classList.add = "alert-danger";
-        messageDisplay.innerHTML = `<strong> ${error.response.data.message} </strong>`;
+      messageDisplay.innerHTML = `
+        <div class="alert alert-danger fade show" role="alert">
+        ${error.response.data.message}  </div>`;
     }
   }
 };
 document.querySelector("#register").addEventListener("click", register);
-
