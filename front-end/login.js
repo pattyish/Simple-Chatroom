@@ -3,6 +3,7 @@ const login = async function () {
   // e.preventDefault();
   const username = document.querySelector("#log-username").value;
   const password = document.querySelector("#log-password").value;
+  const messageDisplay = document.querySelector("#response-msg");
 
   if (password == "" || username == "") {
     console.log("Please User-name and password required!!");
