@@ -30,9 +30,10 @@ const register = async function () {
         messageDisplay.innerHTML = `
         <div class="alert alert-success fade show" role="alert">
         ${res.data.message}  </div>`;
-        name.value = "";
-        username.value = "";
-        password.value = "";
+        document.querySelector("#reg-name").value = "";
+        document.querySelector("#reg-username").value = "";
+        document.querySelector("#reg-password").value = "";
+        
       }
     } catch (error) {
       console.log(error.response.data.message);
