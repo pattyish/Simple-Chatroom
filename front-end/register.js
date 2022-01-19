@@ -5,6 +5,7 @@ const register = async function () {
   const name = document.querySelector("#reg-name").value;
   const username = document.querySelector("#reg-username").value;
   const password = document.querySelector("#reg-password").value;
+  const messageDisplay = document.querySelector("#response-msg");
 
   if (name == "" || password == "" || username == "") {
     console.log("Please All Field Are Required!!");
@@ -24,19 +25,18 @@ const register = async function () {
       };
       console.log({ name: name, username: username, password: password });
       console.log(BASE);
-      // const res = await axios.post(`${BASE}/chat/user/sign_up`, auth, config);
-      const res = await axios.get('https://api.github.com/users/mapbox')
-      console.log("Hello world!!");
-      console.log(res)
-      if (res.status === 200) {
-        console.log(res);
-      } else {
-        console.log(`problem`);
+      const res = await axios.post(`${BASE}/chat/user/sign_up`, auth, config);
+      if (res.status === 201) {
+        messageDisplay.innerHTML = `
+        <div class="alert alert-danger fade show" role="alert">
+        ${res.message}  </div>`;
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
+      messageDisplay.innerHTML = `
+        <div class="alert alert-danger fade show" role="alert">
+        ${error.response.data.message}  </div>`;
     }
   }
 };
 document.querySelector("#register").addEventListener("click", register);
-
