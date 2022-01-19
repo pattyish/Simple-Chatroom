@@ -28,8 +28,11 @@ const register = async function () {
       const res = await axios.post(`${BASE}/chat/user/sign_up`, auth, config);
       if (res.status === 201) {
         messageDisplay.innerHTML = `
-        <div class="alert alert-danger fade show" role="alert">
-        ${res.message}  </div>`;
+        <div class="alert alert-success fade show" role="alert">
+        ${res.data.message}  </div>`;
+        name.value = "";
+        username.value = "";
+        password.value = "";
       }
     } catch (error) {
       console.log(error.response.data.message);
