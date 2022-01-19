@@ -34,7 +34,7 @@ const register = async function () {
         console.log(`problem`);
       }
     } catch (error) {
-      console.log(error.response);
+      console.log(error.response.data.message);
     }
   }
 };
