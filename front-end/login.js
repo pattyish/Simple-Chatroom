@@ -21,7 +21,7 @@ const login = async function () {
       const res = await axios.post(`${BASE}/chat/user/sign_in`, auth, config);
       if (res.status === 200) {
         localStorage.setItem("CC_Token", res.data.token);
-        window.location.href = `FSE_Chatroom/front-end/chatroom.html`;
+        window.location.href = `/chatroom.html`;
       }
     } catch (error) {
       console.log(error.response.data.message);
