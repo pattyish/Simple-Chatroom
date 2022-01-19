@@ -28,13 +28,13 @@ const register = async function () {
       // const res = await axios.get('https://api.github.com/users')
       console.log("Hello world!!");
       console.log(res)
-      if (res.status === 200) {
+      if (res.status === 201) {
         console.log(res);
       } else {
         console.log(`problem`);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   }
 };
