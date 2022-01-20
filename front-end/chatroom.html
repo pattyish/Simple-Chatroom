@@ -53,6 +53,9 @@
             <script type="text/javascript">
                 const socket = io.connect("http://localhost:8080", {
                     transports: ["websocket"],
+                    query: {
+                        token: localStorage.getItem("CC_Token"),
+                    }
                 });
                 socket.on("chat", (playload) => {
                     let message = `
