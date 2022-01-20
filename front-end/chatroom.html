@@ -88,6 +88,13 @@
                 };
 
                 document.querySelector("#post-message").addEventListener("click", postMessage);
+
+                const logout = () => {
+                 localStorage.removeItem("CC_Token");
+                 window.location.href = `https://pattyish.github.io/FSE_Chatroom/front-end/`;
+                }
+
+                document.querySelector("#logout").addEventListener("click", logout)
             </script>
 </body>
 
