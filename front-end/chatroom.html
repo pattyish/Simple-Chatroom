@@ -128,7 +128,7 @@
                     console.log(
                         `Chat message have reached out with ${playload.name} and ${playload.message}`
                     );
-                    document.getElementById("message-box").appendChild(message);
+                    document.getElementById("message-box").innerHTML += message;
                 });
 
                 const postMessage = () => {
