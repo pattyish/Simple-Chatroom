@@ -14,6 +14,7 @@ import DBOperation from "./Database/dbOperation.js";
 dotenv.config();
 
 const db = new DBOperation("chat_messages");
+const db_ = new DBOperation("users");
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -35,6 +36,8 @@ io.use(async (socket, next) => {
     const token = socket.handshake.query.token;
     const payload = jwt.verify(token, process.env.SECRET_KEY);
     socket.user_id = payload.id;
+    console.log(socket.user_id);
+    next();
   } catch (error) {
     console.log(error.message);
   }
@@ -45,8 +48,13 @@ io.on("connection", (socket) => {
   // socket.emit("chat", {name: "Patrick Ishimwe", message: "hello world"});
   socket.on("chatroom", async (payload) => {
     console.log(payload);
+    const user_info = await db_.selectByColumn("user_id", socket.user_id);
+    console.log(user_info.rows)
+    if (!user_info.rows[0]) {
+      console.log("No use in Database!!!");
+    }
     const message = {
-      sender_id: payload.user_id,
+      sender_id: socket.user_id,
       message: payload.message,
     };
     const messageSchema = new messageModels(message);
@@ -57,8 +65,11 @@ io.on("connection", (socket) => {
     if (!saveMessage.rows[0]) {
       console.log("Error on saving Message");
     }
+    delete messageSchema.sender_id;
+    messageSchema.username = user_info.rows[0].username;
+    console.log(messageSchema);
     console.log("What is playload: ", message);
-    io.emit("chat", message);
+    io.emit("chat", messageSchema);
   });
 });
 server.listen(PORT, () => {
