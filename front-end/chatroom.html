@@ -35,6 +35,7 @@
                             <div class="col-12 chatroom-text-area">
                                 <input text="text" id="text-message" class="input-box" />
                             </div>
+                            <div id="feedback"></div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +50,7 @@
                 integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
                 crossorigin="anonymous"></script>
             <!-- <script src="/socket.io/socket.io.js"></script> -->
-            <script  type="text/javascript">
+            <script type="text/javascript">
                 const socket = io.connect("http://localhost:8080", {
                     transports: ["websocket"],
                 });
@@ -77,21 +78,24 @@
                 const postMessage = () => {
                     const message = document.querySelector("#text-message").value;
                     if (message == "") {
-                        console.log("You cannot sent empty string!!!");
+                        document.querySelector("#feedback").innerHTML = `<div class="alert alert-danger fade show" role="alert">
+                            Not allowed to submit empty string!  
+                            </div>`
                     } else {
                         socket.emit("chatroom", {
                             user_id: 0023441,
                             name: "Patrick Ishimwe",
                             message: message,
                         });
+                        document.querySelector("#text-message").value = "";
                     }
                 };
 
                 document.querySelector("#post-message").addEventListener("click", postMessage);
 
                 const logout = () => {
-                 localStorage.removeItem("CC_Token");
-                 window.location.href = `https://pattyish.github.io/FSE_Chatroom/front-end/`;
+                    localStorage.removeItem("CC_Token");
+                    window.location.href = `https://pattyish.github.io/FSE_Chatroom/front-end/`;
                 }
 
                 document.querySelector("#logout").addEventListener("click", logout)
