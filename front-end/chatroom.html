@@ -83,6 +83,7 @@
                             </div>`
                     } else {
                         socket.emit("chatroom", {
+                            sender_id: 122222,
                             message: message,
                         });
                         document.querySelector("#text-message").value = "";
