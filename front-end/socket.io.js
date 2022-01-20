@@ -2,6 +2,7 @@ const socket = io.connect("http://localhost:8080", {
   transports: ["websocket"],
 });
 socket.on("chat", (playload) => {
+  // const div = document.createElement("div");
   let message = `
   <div class=" col-md-12 bg-light chatroom-messages">
   <div class="row justify-content-between messages">
@@ -15,11 +16,13 @@ socket.on("chat", (playload) => {
       <p>${playload.message}</p>
     </div>
   </div>
-</div>;`;
+</div>`;
+// div.innerHTML = message;
+
   console.log(
     `Chat message have reached out with ${playload.name} and ${playload.message}`
   );
-  document.getElementById("message-box").innerHTML = message;
+  document.getElementById("message-box").innerHTML += message;
 });
 
 const postMessage = () => {
