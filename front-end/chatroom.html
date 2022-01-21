@@ -60,6 +60,54 @@
                     }
                 });
 
+                const displayAllChat = async () => {
+                    try {
+                        const res = await axios.get("http://localhost:8080/api/v1/chat/user/", {
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
+                            }
+                        });
+                        const res_ = await axios.get("http://localhost:8080/api/v1/chat/user/", {
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
+                            }
+                        });
+                        const userName = res.data.userProfile_.username;
+                        let message = "";
+                        const chats = res_.data.chats;
+                        if (res_.data.chats.length === 0) {
+                            console.log('No Featured Properties Found!!');
+                        } else {
+                            chats.forEach((chat) => {
+                                message += `
+                            <div class=" col-md-12 bg-light chatroom-messages">
+                            <div class="row justify-content-between messages">
+                                <div class="col-4">`;
+                                if (userName == chat.username) {
+                                    message += `<h6>Me</h6>`;
+                                } else {
+                                    message += `<h6>${chat.username}</h6>`;
+                                }
+                                message += ` 
+                            </div>
+                            <div class="col-4 msg-date-time">
+                            <h6>${chat.createdat}</h6>
+                            </div>
+                            <div class="col-12">
+                            <p>${chat.message}</p>
+                            </div>
+                        </div>
+                        </div>`;
+                            });
+                        }
+                        document.getElementById("message-box").innerHTML += message;
+                    } catch (error) {
+                        console.log("Error found!!!!", error.message);
+                    }
+                }
+
+                displayAllChat();
+
                 const sockectMessage = async () => {
                     try {
                         const res = await axios.get("http://localhost:8080/api/v1/chat/user/", {
