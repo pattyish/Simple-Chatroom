@@ -67,7 +67,7 @@
                                 authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
                             }
                         });
-                        const res_ = await axios.get("http://localhost:8080/api/v1/chat/user/", {
+                        const res_ = await axios.get("http://localhost:8080/api/v1/chatroom/chats", {
                             headers: {
                                 authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
                             }
