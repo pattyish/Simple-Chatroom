@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
   socket.on("chatroom", async (payload) => {
     console.log(payload);
     const user_info = await db_.selectByColumn("user_id", socket.user_id);
-    console.log(user_info.rows)
+    console.log(user_info.rows);
     if (!user_info.rows[0]) {
       console.log("No use in Database!!!");
     }
@@ -67,6 +67,9 @@ io.on("connection", (socket) => {
     }
     delete messageSchema.sender_id;
     messageSchema.username = user_info.rows[0].username;
+    messageSchema.createdat = moment(messageSchema.createdat).format(
+      "MMMM Do YYYY, h:mm:ss a"
+    );
     console.log(messageSchema);
     console.log("What is playload: ", message);
     io.emit("chat", messageSchema);

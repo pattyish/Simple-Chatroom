@@ -92,10 +92,29 @@ class UserController {
       });
     }
   }
-  static async updatePassword(req, res) {
+  static async getUserProfile(req, res) {
     try {
+      const userProfile = await db.selectByColumn("user_id", req.payload.id);
+      if (!userProfile.rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          message: `User with this ${userCredential.username} doesn't exist!!!`,
+        });
+      }
+      const userProfile_ = {
+        name: userProfile.rows[0].name,
+        username: userProfile.rows[0].username,
+      }
+      res.status(200).json({
+        status: 200,
+        message: "All Chats",
+        userProfile_
+      });
     } catch (error) {
       console.log(error.message);
+      res.status(500).json({
+        msg: "Server Error!!",
+      });
     }
   }
 }

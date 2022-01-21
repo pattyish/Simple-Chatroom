@@ -18,7 +18,8 @@ class Operations {
   }
   async getAll() {
     const query = {
-      text: `SELECT * FROM ${this.tableName}`,
+      text: `SELECT users.name, users.username, ${this.tableName}.createdAt, ${this.tableName}.message
+      FROM ${this.tableName} INNER JOIN users ON ${this.tableName}.sender_id = users.user_id`,
     };
     try {
       const results = await pool.query(query);
