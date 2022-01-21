@@ -52,6 +52,7 @@
                 crossorigin="anonymous"></script>
             <!-- <script src="/socket.io/socket.io.js"></script> -->
             <script type="text/javascript">
+                const userName = "";
                 const socket = io.connect("http://localhost:8080", {
                     transports: ["websocket"],
                     query: {
@@ -59,11 +60,17 @@
                     }
                 });
                 socket.on("chat", (playload) => {
-                    let message = `
+                    let message = "";
+                    message += `
                     <div class=" col-md-12 bg-light chatroom-messages">
                     <div class="row justify-content-between messages">
-                        <div class="col-4">
-                        <h6>${playload.username}</h6>
+                        <div class="col-4">`;
+                    if (userName == playload.username) {
+                        message += `<h6>Me</h6>`;
+                    } else {
+                        message += `<h6>${playload.username}</h6>`;
+                    }
+                    message += ` 
                         </div>
                         <div class="col-4 msg-date-time">
                         <h6>${playload.createdat}</h6>
@@ -87,7 +94,6 @@
                             </div>`
                     } else {
                         socket.emit("chatroom", {
-                            sender_id: 122222,
                             message: message,
                         });
                         document.querySelector("#text-message").value = "";
@@ -104,12 +110,16 @@
                 document.querySelector("#logout").addEventListener("click", logout);
 
                 const getProfile = async () => {
+                    2
                     try {
                         const res = await axios.get("http://localhost:8080/api/v1/chat/user/", {
                             headers: {
                                 authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
                             }
                         });
+                        userName = res.data.userProfile_.username;
+                        document.querySelector("#user-name").innerHTML = `${res.data.userProfile_.username}`;
+                        console.log(userName);
                         console.log(res)
                     } catch (error) {
                         console.log("Error found!!!!", error.message);
