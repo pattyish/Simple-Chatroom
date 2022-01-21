@@ -59,33 +59,47 @@
                         token: localStorage.getItem("CC_Token"),
                     }
                 });
-                socket.on("chat", (playload) => {
-                    let message = "";
-                    message += `
-                    <div class=" col-md-12 bg-light chatroom-messages">
-                    <div class="row justify-content-between messages">
-                        <div class="col-4">`;
-                    if (userName == playload.username) {
-                        message += `<h6>Me</h6>`;
-                    } else {
-                        message += `<h6>${playload.username}</h6>`;
-                    }
-                    message += ` 
-                        </div>
-                        <div class="col-4 msg-date-time">
-                        <h6>${playload.createdat}</h6>
-                        </div>
-                        <div class="col-12">
-                        <p>${playload.message}</p>
-                        </div>
-                    </div>
-                    </div>`;
-                    console.log(
-                        `Chat message have reached out with ${playload.name} and ${playload.message}`
-                    );
-                    document.getElementById("message-box").innerHTML += message;
-                });
 
+                const sockectMessage = async () => {
+                    try {
+                        const res = await axios.get("http://localhost:8080/api/v1/chat/user/", {
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
+                            }
+                        });
+                        const userName = res.data.userProfile_.username;
+                        socket.on("chat", (playload) => {
+
+                            let message = "";
+                            message += `
+                            <div class=" col-md-12 bg-light chatroom-messages">
+                            <div class="row justify-content-between messages">
+                                <div class="col-4">`;
+                            if (userName == playload.username) {
+                                message += `<h6>Me</h6>`;
+                            } else {
+                                message += `<h6>${playload.username}</h6>`;
+                            }
+                            message += ` 
+                            </div>
+                            <div class="col-4 msg-date-time">
+                            <h6>${playload.createdat}</h6>
+                            </div>
+                            <div class="col-12">
+                            <p>${playload.message}</p>
+                            </div>
+                        </div>
+                        </div>`;
+                            console.log(
+                                `Chat message have reached out with ${playload.name} and ${playload.message}`
+                            );
+                            document.getElementById("message-box").innerHTML += message;
+                        });
+                    } catch (error) {
+                        console.log("Error found!!!!", error.message);
+                    }
+                }
+                sockectMessage();
                 const postMessage = () => {
                     const message = document.querySelector("#text-message").value;
                     if (message == "") {
@@ -110,14 +124,13 @@
                 document.querySelector("#logout").addEventListener("click", logout);
 
                 const getProfile = async () => {
-                    2
                     try {
                         const res = await axios.get("http://localhost:8080/api/v1/chat/user/", {
                             headers: {
                                 authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
                             }
                         });
-                        userName = res.data.userProfile_.username;
+
                         document.querySelector("#user-name").innerHTML = `${res.data.userProfile_.username}`;
                         console.log(userName);
                         console.log(res)
