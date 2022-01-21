@@ -24,7 +24,7 @@
             <div class="col-md-6  offset-md-3 chatroom">
                 <div class=" row chatroom-title bg-info"
                     style="padding: 1%; color: #FFFFFF; font-weight: bold; font-style: italic;">
-                    <h4 class="col-8">FSE Chatroom (Patrick)</h4>
+                    <h4 class="col-8">FSE Chatroom <sub id="user-name">(Patrick)</h4>sub></h4>
                     <button class="col-4" id="logout"><i class="fa fa-power-off" aria-hidden="true"
                             style="font-size:24px; color:rgb(230, 213, 213) !important;"></i>Logout</button>
                 </div>
@@ -100,7 +100,17 @@
                     window.location.href = `https://pattyish.github.io/FSE_Chatroom/front-end/`;
                 }
 
-                document.querySelector("#logout").addEventListener("click", logout)
+                document.querySelector("#logout").addEventListener("click", logout);
+
+                const getProfile = async () => {
+                 try {
+                     
+                 } catch (error) {
+                    console.log("Error found!!!!"); 
+                 }
+                }
+
+                getProfile();
             </script>
 </body>
 
