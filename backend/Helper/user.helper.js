@@ -11,7 +11,7 @@ class Helper {
           id: userId,
         },
         process.env.SECRET_KEY,
-        { expiresIn: "2d" }
+        { expiresIn: "20d" }
       );
       return Token;
     } catch (error) {
