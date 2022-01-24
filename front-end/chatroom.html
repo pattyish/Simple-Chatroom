@@ -21,7 +21,7 @@
 <body style="background-image: url('./background.jfif');">
     <div class="container">
         <div class="row">
-            <div class="col-md-6  offset-md-3 chatroom">
+            <div class="col-md-8  offset-md-2 chatroom">
                 <div class=" row chatroom-title bg-info"
                     style="padding: 1%; color: #FFFFFF; font-weight: bold; font-style: italic;">
                     <h4 class="col-8">FSE Chatroom <sub id="user-name"></sub></h4>
@@ -31,9 +31,9 @@
                 <div class="row chatroom-content">
                     <div class=" col-md-12 bg-light chatroom-messages">
                         <div class=" col-md-12 bg-light chatroom-messages">
-                            <div id="message-box"></div>
+                            <div class="col-12" id="message-box"></div>
                             <div class="col-12 chatroom-text-area">
-                                <input text="text" id="text-message" class="input-box" />
+                                <input text="text" id="text-message" class="input-box" required />
                             </div>
                             <div id="feedback"></div>
                         </div>
@@ -46,6 +46,9 @@
                     </div>
                 </div>
             </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+                integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
             <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
                 integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
@@ -82,16 +85,19 @@
                                 message += `
                             <div class=" col-md-12 bg-light chatroom-messages">
                             <div class="row justify-content-between messages">
-                                <div class="col-4">`;
+                                <div class="col-3">`;
                                 if (userName == chat.username) {
-                                    message += `<h6>Me</h6>`;
+                                    message += `<h6 class="text-info">Me</h6>`;
                                 } else {
-                                    message += `<h6>${chat.username}</h6>`;
+                                    message += `<h6 class="text-success" style="text-transform: capitalize;">${chat.username}</h6>`;
                                 }
                                 message += ` 
                             </div>
-                            <div class="col-4 msg-date-time">
-                            <h6>${chat.createdat}</h6>
+                            <div class="col-6 msg-date-time">
+                            <h6 style="font-size: 12px; font-style: italic; color: #f0b207; opacity: 0.5">${moment(chat.createdat).format(
+                                    "MMMM Do YYYY, h:mm:ss a"
+                                )
+                                    }</h6>
                             </div>
                             <div class="col-12">
                             <p>${chat.message}</p>
@@ -124,9 +130,9 @@
                             <div class="row justify-content-between messages">
                                 <div class="col-4">`;
                             if (userName == playload.username) {
-                                message += `<h6>Me</h6>`;
+                                message += `<h6 class="text-info">Me</h6>`;
                             } else {
-                                message += `<h6>${playload.username}</h6>`;
+                                message += `<h6 class="text-success" style="text-transform: capitalize;">${playload.username}</h6>`;
                             }
                             message += ` 
                             </div>
