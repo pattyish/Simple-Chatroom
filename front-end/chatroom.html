@@ -24,7 +24,7 @@
             <div class="col-md-6  offset-md-3 chatroom">
                 <div class=" row chatroom-title bg-info"
                     style="padding: 1%; color: #FFFFFF; font-weight: bold; font-style: italic;">
-                    <h4 class="col-8">FSE Chatroom (Patrick)</h4>
+                    <h4 class="col-8">FSE Chatroom <sub id="user-name"></sub></h4>
                     <button class="col-4" id="logout"><i class="fa fa-power-off" aria-hidden="true"
                             style="font-size:24px; color:rgb(230, 213, 213) !important;"></i>Logout</button>
                 </div>
@@ -46,35 +46,108 @@
                     </div>
                 </div>
             </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
             <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
                 integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
                 crossorigin="anonymous"></script>
             <!-- <script src="/socket.io/socket.io.js"></script> -->
             <script type="text/javascript">
+                const userName = "";
                 const socket = io.connect("http://localhost:8080", {
                     transports: ["websocket"],
-                });
-                socket.on("chat", (playload) => {
-                    let message = `
-                    <div class=" col-md-12 bg-light chatroom-messages">
-                    <div class="row justify-content-between messages">
-                        <div class="col-4">
-                        <h6>${playload.sender_id}</h6>
-                        </div>
-                        <div class="col-4 msg-date-time">
-                        <h6>2020-01-17</h6>
-                        </div>
-                        <div class="col-12">
-                        <p>${playload.message}</p>
-                        </div>
-                    </div>
-                    </div>`;
-                    console.log(
-                        `Chat message have reached out with ${playload.name} and ${playload.message}`
-                    );
-                    document.getElementById("message-box").innerHTML += message;
+                    query: {
+                        token: localStorage.getItem("CC_Token"),
+                    }
                 });
 
+                const displayAllChat = async () => {
+                    try {
+                        const res = await axios.get("http://localhost:8080/api/v1/chat/user/", {
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
+                            }
+                        });
+                        const res_ = await axios.get("http://localhost:8080/api/v1/chatroom/chats", {
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
+                            }
+                        });
+                        const userName = res.data.userProfile_.username;
+                        let message = "";
+                        const chats = res_.data.chats;
+                        if (res_.data.chats.length === 0) {
+                            console.log('No Featured Properties Found!!');
+                        } else {
+                            chats.forEach((chat) => {
+                                message += `
+                            <div class=" col-md-12 bg-light chatroom-messages">
+                            <div class="row justify-content-between messages">
+                                <div class="col-4">`;
+                                if (userName == chat.username) {
+                                    message += `<h6>Me</h6>`;
+                                } else {
+                                    message += `<h6>${chat.username}</h6>`;
+                                }
+                                message += ` 
+                            </div>
+                            <div class="col-4 msg-date-time">
+                            <h6>${chat.createdat}</h6>
+                            </div>
+                            <div class="col-12">
+                            <p>${chat.message}</p>
+                            </div>
+                        </div>
+                        </div>`;
+                            });
+                        }
+                        document.getElementById("message-box").innerHTML += message;
+                    } catch (error) {
+                        console.log("Error found!!!!", error.message);
+                    }
+                }
+
+                displayAllChat();
+
+                const sockectMessage = async () => {
+                    try {
+                        const res = await axios.get("http://localhost:8080/api/v1/chat/user/", {
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
+                            }
+                        });
+                        const userName = res.data.userProfile_.username;
+                        socket.on("chat", (playload) => {
+
+                            let message = "";
+                            message += `
+                            <div class=" col-md-12 bg-light chatroom-messages">
+                            <div class="row justify-content-between messages">
+                                <div class="col-4">`;
+                            if (userName == playload.username) {
+                                message += `<h6>Me</h6>`;
+                            } else {
+                                message += `<h6>${playload.username}</h6>`;
+                            }
+                            message += ` 
+                            </div>
+                            <div class="col-4 msg-date-time">
+                            <h6>${playload.createdat}</h6>
+                            </div>
+                            <div class="col-12">
+                            <p>${playload.message}</p>
+                            </div>
+                        </div>
+                        </div>`;
+                            console.log(
+                                `Chat message have reached out with ${playload.name} and ${playload.message}`
+                            );
+                            document.getElementById("message-box").innerHTML += message;
+                        });
+                    } catch (error) {
+                        console.log("Error found!!!!", error.message);
+                    }
+                }
+                sockectMessage();
                 const postMessage = () => {
                     const message = document.querySelector("#text-message").value;
                     if (message == "") {
@@ -96,7 +169,25 @@
                     window.location.href = `https://pattyish.github.io/FSE_Chatroom/front-end/`;
                 }
 
-                document.querySelector("#logout").addEventListener("click", logout)
+                document.querySelector("#logout").addEventListener("click", logout);
+
+                const getProfile = async () => {
+                    try {
+                        const res = await axios.get("http://localhost:8080/api/v1/chat/user/", {
+                            headers: {
+                                authorization: `Bearer ${localStorage.getItem("CC_Token")}`,
+                            }
+                        });
+
+                        document.querySelector("#user-name").innerHTML = `${res.data.userProfile_.username}`;
+                        console.log(userName);
+                        console.log(res)
+                    } catch (error) {
+                        console.log("Error found!!!!", error.message);
+                    }
+                }
+
+                getProfile();
             </script>
 </body>
 
