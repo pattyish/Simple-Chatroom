@@ -31,9 +31,9 @@
                 <div class="row chatroom-content">
                     <div class=" col-md-12 bg-light chatroom-messages">
                         <div class=" col-md-12 bg-light chatroom-messages">
-                            <div id="message-box"></div>
+                            <div class="col-12" id="message-box"></div>
                             <div class="col-12 chatroom-text-area">
-                                <input text="text" id="text-message" class="input-box" />
+                                <input text="text" id="text-message" class="input-box" required />
                             </div>
                             <div id="feedback"></div>
                         </div>
@@ -45,7 +45,10 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div>\
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+                integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
             <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"
                 integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
@@ -91,7 +94,10 @@
                                 message += ` 
                             </div>
                             <div class="col-4 msg-date-time">
-                            <h6>${chat.createdat}</h6>
+                            <h6>${moment(chat.createdat).format(
+                                    "MMMM Do YYYY, h:mm:ss a"
+                                )
+                                    }</h6>
                             </div>
                             <div class="col-12">
                             <p>${chat.message}</p>

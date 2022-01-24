@@ -52,3 +52,7 @@ border-bottom: 2px solid white;
     background-color: #f8f9fa !important;
     opacity: 0.9;
 }
+.message-box {
+    height: 200px;
+    overflow-y: scroll;
+}
