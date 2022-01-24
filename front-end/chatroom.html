@@ -55,6 +55,8 @@
                 crossorigin="anonymous"></script>
             <!-- <script src="/socket.io/socket.io.js"></script> -->
             <script type="text/javascript">
+                var objDiv = document.getElementById("message-box");
+                objDiv.scrollTop = objDiv.scrollHeight;
                 const userName = "";
                 const socket = io.connect("http://localhost:8080", {
                     transports: ["websocket"],
@@ -137,7 +139,7 @@
                             message += ` 
                             </div>
                             <div class="col-4 msg-date-time">
-                            <h6>${playload.createdat}</h6>
+                            <h6 style="font-size: 12px; font-style: italic; color: #f0b207; opacity: 0.5">${playload.createdat}</h6>
                             </div>
                             <div class="col-12">
                             <p>${playload.message}</p>
@@ -148,6 +150,10 @@
                                 `Chat message have reached out with ${playload.name} and ${playload.message}`
                             );
                             document.getElementById("message-box").innerHTML += message;
+
+                            var objDiv = document.getElementById("message-box");
+                            objDiv.scrollTop = objDiv.scrollHeight;
+
                         });
                     } catch (error) {
                         console.log("Error found!!!!", error.message);
