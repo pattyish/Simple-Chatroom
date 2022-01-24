@@ -87,14 +87,14 @@
                             <div class="row justify-content-between messages">
                                 <div class="col-3">`;
                                 if (userName == chat.username) {
-                                    message += `<h6>Me</h6>`;
+                                    message += `<h6 class="text-info">Me</h6>`;
                                 } else {
-                                    message += `<h6>${chat.username}</h6>`;
+                                    message += `<h6 class="text-success" style="text-transform: capitalize;">${chat.username}</h6>`;
                                 }
                                 message += ` 
                             </div>
                             <div class="col-6 msg-date-time">
-                            <h6 style="font-size: 10px; font-style: italic; color: #f0b207; opacity: 0.6">${moment(chat.createdat).format(
+                            <h6 style="font-size: 12px; font-style: italic; color: #f0b207; opacity: 0.5">${moment(chat.createdat).format(
                                     "MMMM Do YYYY, h:mm:ss a"
                                 )
                                     }</h6>
