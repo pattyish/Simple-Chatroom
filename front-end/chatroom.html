@@ -130,9 +130,9 @@
                             <div class="row justify-content-between messages">
                                 <div class="col-4">`;
                             if (userName == playload.username) {
-                                message += `<h6>Me</h6>`;
+                                message += `<h6 class="text-info">Me</h6>`;
                             } else {
-                                message += `<h6>${playload.username}</h6>`;
+                                message += `<h6 class="text-success" style="text-transform: capitalize;">${playload.username}</h6>`;
                             }
                             message += ` 
                             </div>
