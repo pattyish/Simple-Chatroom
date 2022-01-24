@@ -21,7 +21,7 @@
 <body style="background-image: url('./background.jfif');">
     <div class="container">
         <div class="row">
-            <div class="col-md-6  offset-md-3 chatroom">
+            <div class="col-md-8  offset-md-2 chatroom">
                 <div class=" row chatroom-title bg-info"
                     style="padding: 1%; color: #FFFFFF; font-weight: bold; font-style: italic;">
                     <h4 class="col-8">FSE Chatroom <sub id="user-name"></sub></h4>
@@ -85,7 +85,7 @@
                                 message += `
                             <div class=" col-md-12 bg-light chatroom-messages">
                             <div class="row justify-content-between messages">
-                                <div class="col-4">`;
+                                <div class="col-3">`;
                                 if (userName == chat.username) {
                                     message += `<h6>Me</h6>`;
                                 } else {
@@ -93,8 +93,8 @@
                                 }
                                 message += ` 
                             </div>
-                            <div class="col-4 msg-date-time">
-                            <h6>${moment(chat.createdat).format(
+                            <div class="col-6 msg-date-time">
+                            <h6 style="font-size: 10px; font-style: italic; color: #f0b207; opacity: 0.6">${moment(chat.createdat).format(
                                     "MMMM Do YYYY, h:mm:ss a"
                                 )
                                     }</h6>
